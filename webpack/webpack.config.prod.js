@@ -4,9 +4,12 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const baseWebpackConfig = require("./webpack.config.base");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
 
-module.exports = merge(baseWebpackConfig, {
+let webpackConfig = merge(baseWebpackConfig, {
   mode: "production",
   optimization: {
     minimizer: [
@@ -36,3 +39,15 @@ module.exports = merge(baseWebpackConfig, {
     }),
   ],
 });
+
+// 模块占用报告
+if (process.env.npm_config_report) {
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+}
+
+// 速度分析报告
+if (process.env.npm_config_speed) {
+  webpackConfig = smp.wrap(webpackConfig);
+}
+
+module.exports = webpackConfig;
