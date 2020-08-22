@@ -1,9 +1,11 @@
 const path = require("path");
+const { DllReferencePlugin } = require("webpack");
 const { merge } = require("webpack-merge");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const baseWebpackConfig = require("./webpack.config.base");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
@@ -37,6 +39,15 @@ let webpackConfig = merge(baseWebpackConfig, {
       filename: "public/styles/[name].[contenthash:8].css",
       chunkFilename: "public/styles/chunk.[name].[contenthash:8].css",
     }),
+    // new DllReferencePlugin({
+    //   context: __dirname,
+    //   manifest: require(`../public/vendor/library.manifest.json`),
+    // }),
+    // new AddAssetHtmlPlugin({
+    //   filepath: require.resolve(path.resolve(`./public/vendor/library.dll.js`)),
+    //   outputPath: "/vendor",
+    //   publicPath: "/vendor",
+    // }),
   ],
 });
 

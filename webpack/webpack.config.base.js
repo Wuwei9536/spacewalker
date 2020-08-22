@@ -18,8 +18,10 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         include: [path.resolve(__dirname, "../src")],
         use: [
+          // { loader: "thread-loader" },
           {
             loader: "babel-loader",
+            options: { cacheDirectory: true },
           },
         ],
       },
@@ -99,7 +101,7 @@ module.exports = {
   },
   plugins: [
     new WebpackBar({
-      name: "正在构建",
+      name: "Build",
       color: "#fa8c16",
     }),
     new HtmlWebpackPlugin({
