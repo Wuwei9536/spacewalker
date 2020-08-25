@@ -5,6 +5,9 @@
     "dist": true,
     "yarn.lock": true
   },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
