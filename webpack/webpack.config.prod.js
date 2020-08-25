@@ -7,8 +7,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const baseWebpackConfig = require('./webpack.config.base')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const baseWebpackConfig = require('./webpack.config.base')
+
+const dllReferenceManifest = require(`../public/vendor/library.manifest.json`)
 const smp = new SpeedMeasurePlugin()
 
 let webpackConfig = merge(baseWebpackConfig, {
@@ -41,7 +43,7 @@ let webpackConfig = merge(baseWebpackConfig, {
     }),
     new DllReferencePlugin({
       context: __dirname,
-      manifest: require(`../public/vendor/library.manifest.json`),
+      manifest: dllReferenceManifest,
     }),
     new AddAssetHtmlPlugin({
       filepath: require.resolve(path.resolve(`./public/vendor/library.dll.js`)),

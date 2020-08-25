@@ -4,7 +4,6 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
 const WebpackBar = require('webpackbar')
-const a = require('./fileListPlugin')
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.tsx'),
@@ -70,7 +69,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [autoprefixer()],
+              plugins: () => [postcssPresetEnv()],
             },
           },
           {
@@ -110,7 +109,6 @@ module.exports = {
       filename: 'index.html', // dist文件
     }),
     new FriendlyErrorsWebpackPlugin(),
-    new a(),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
