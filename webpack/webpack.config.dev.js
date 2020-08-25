@@ -1,24 +1,24 @@
-const path = require("path");
-const webpack = require("webpack");
-const { merge } = require("webpack-merge");
-const baseWebpackConfig = require("./webpack.config.base");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.config.base')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(baseWebpackConfig, {
-  mode: "development",
-  devtool: "inline-source-map",
+  mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
     hot: true,
-    host: "127.0.0.1",
+    host: '127.0.0.1',
     port: 8000,
-    stats: "errors-only",
+    stats: 'errors-only',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: "public/styles/[name].css",
-      chunkFilename: "public/styles/chunk.[id].css",
+      filename: 'public/styles/[name].css',
+      chunkFilename: 'public/styles/chunk.[id].css',
     }),
   ],
-});
+})
