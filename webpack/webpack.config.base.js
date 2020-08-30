@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'public/js/[name].[hash].js',
-    publicPath: '/',
+    publicPath: 'https://cdn.fastrtc.wuwei.tech/',
   },
   module: {
     rules: [
